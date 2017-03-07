@@ -48,6 +48,9 @@ export const normalizeSettings = ( settings ) => {
 export const sanitizeSettings = ( settings ) => {
 	return Object.keys( settings ).reduce( ( memo, key ) => {
 		switch ( key ) {
+			// Jetpack's settings endpoint in version 4.9 does not support receiving 'akismet' among the settings
+			case 'akismet':
+				break;
 			case 'post_by_email_address':
 				break;
 			case 'infinite-scroll':
