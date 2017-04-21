@@ -25,7 +25,11 @@ var updatePostStatus = require( 'lib/mixins/update-post-status' ),
 	classNames = require( 'classnames' );
 
 import MenuSeparator from 'components/popover/menu-separator';
-import { hasStaticFrontPage, isSitePreviewable } from 'state/sites/selectors';
+import {
+	getSite,
+	hasStaticFrontPage,
+	isSitePreviewable,
+} from 'state/sites/selectors';
 import {
 	isFrontPage,
 	isPostsPage,
@@ -251,7 +255,10 @@ const Page = React.createClass( {
 	},
 
 	getCopyItem: function() {
-		const { page: post, site } = this.props;
+		const {
+			page: post,
+			siteSlugOrId,
+		} = this.props;
 		if (
 			! includes( [ 'draft', 'future', 'pending', 'private', 'publish' ], post.status ) ||
 			! utils.userCan( 'edit_post', post )
@@ -259,7 +266,7 @@ const Page = React.createClass( {
 			return null;
 		}
 		return (
-			<PopoverMenuItem onClick={ this.copyPage } href={ `/page/${ site.slug }?copy=${ post.ID }` }>
+			<PopoverMenuItem onClick={ this.copyPage } href={ `/page/${ siteSlugOrId }?copy=${ post.ID }` }>
 				<Gridicon icon="clipboard" size={ 18 } />
 				{ this.translate( 'Copy' ) }
 			</PopoverMenuItem>
@@ -440,12 +447,17 @@ const Page = React.createClass( {
 
 export default connect(
 	( state, props ) => {
+		const site = getSite( state, props.page.site_ID ) || {};
+		const siteSlugOrId = site.slug || site.ID || null;
+
 		return {
 			hasStaticFrontPage: hasStaticFrontPage( state, props.page.site_ID ),
 			isFrontPage: isFrontPage( state, props.page.site_ID, props.page.ID ),
 			isPostsPage: isPostsPage( state, props.page.site_ID, props.page.ID ),
-			isPreviewable: false !== isSitePreviewable( state, props.site.ID ),
+			isPreviewable: false !== isSitePreviewable( state, props.page.site_ID ),
 			previewURL: getPreviewURL( props.page ),
+			site,
+			siteSlugOrId,
 		};
 	},
 	( dispatch ) => bindActionCreators( {
