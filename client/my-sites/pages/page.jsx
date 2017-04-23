@@ -389,7 +389,7 @@ const Page = React.createClass( {
 
 		return (
 			<CompactCard className="page">
-				{ this.props.multisite ? <SiteIcon site={ site } size={ 34 } /> : null }
+				{ this.props.multisite ? <SiteIcon siteId={ page.site_ID } size={ 34 } /> : null }
 				<a className="page__title"
 					href={ canEdit ? helpers.editLinkForPage( page, site ) : page.URL }
 					title={ canEdit ?

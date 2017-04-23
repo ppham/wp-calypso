@@ -203,7 +203,7 @@ var Pages = React.createClass( {
 			if ( i % 4 === 0 ) {
 				rows.push( <Placeholder.Marker key={ 'placeholder-marker-' + i } /> );
 			}
-			rows.push( <Placeholder.Page key={ 'placeholder-page-' + i } multisite={ this.props.siteID === false } /> );
+			rows.push( <Placeholder.Page key={ 'placeholder-page-' + i } multisite={ ! this.props.site } /> );
 		}
 	},
 
@@ -224,7 +224,7 @@ var Pages = React.createClass( {
 
 					// Render each page
 				return (
-						<Page key={ 'page-' + page.global_ID } page={ page } multisite={ this.props.siteID === false } />
+						<Page key={ 'page-' + page.global_ID } page={ page } multisite={ ! this.props.site } />
 					);
 			}, this );
 
