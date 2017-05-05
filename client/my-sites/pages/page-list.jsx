@@ -6,7 +6,6 @@ var React = require( 'react' ),
 
 import { connect } from 'react-redux';
 import {
-	isEmpty,
 	omit,
 } from 'lodash';
 
@@ -23,6 +22,9 @@ var PostListFetcher = require( 'components/post-list-fetcher' ),
 	mapStatus = require( 'lib/route' ).mapPostStatus;
 
 import BlogPostsPage from './blog-posts-page';
+import {
+	hasInitializedSites,
+} from 'state/selectors';
 import {
 	getSelectedSite,
 	getSelectedSiteId,
@@ -261,7 +263,7 @@ var Pages = React.createClass( {
 
 const mapState = state => {
 	return {
-		hasSites: ! isEmpty( state.sites.items ),
+		hasSites: hasInitializedSites( state ),
 		site: getSelectedSite( state ),
 		siteId: getSelectedSiteId( state ),
 	};
