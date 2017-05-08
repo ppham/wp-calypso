@@ -112,7 +112,7 @@ class SiteOrDomain extends Component {
 					positionInFlow={ 1 }
 					stepName={ this.props.stepName }
 					stepSectionName={ this.props.stepSectionName }
-					backUrl="https://wordpress.com/domains"
+					backUrl="/domains"
 					signupProgress={ this.props.signupProgress }
 				/>
 			</div>
