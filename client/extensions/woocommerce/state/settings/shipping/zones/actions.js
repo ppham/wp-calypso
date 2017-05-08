@@ -7,6 +7,7 @@ import {
 	WOOCOMMERCE_SHIPPING_ZONE_ADD,
 	WOOCOMMERCE_SHIPPING_ZONE_CANCEL,
 	WOOCOMMERCE_SHIPPING_ZONE_CLOSE,
+	WOOCOMMERCE_SHIPPING_ZONE_EDIT,
 	WOOCOMMERCE_SHIPPING_ZONE_LOCATION_ADD,
 	WOOCOMMERCE_SHIPPING_ZONE_LOCATION_REMOVE,
 	WOOCOMMERCE_SHIPPING_ZONE_LOCATIONS_FETCH_ERROR,
@@ -52,11 +53,13 @@ export const submitChanges = () => ( /* dispatch, getState */ ) => {
 
 export const addShippingZone = () => ( { type: WOOCOMMERCE_SHIPPING_ZONE_ADD } );
 
+export const editShippingZone = ( index ) => ( { type: WOOCOMMERCE_SHIPPING_ZONE_EDIT, index } );
+
 export const cancelEditingShippingZone = () => ( { type: WOOCOMMERCE_SHIPPING_ZONE_CANCEL } );
 
 export const closeEditingShippingZone = () => ( { type: WOOCOMMERCE_SHIPPING_ZONE_CLOSE } );
 
-export const removeShippingZone = ( id ) => ( { type: WOOCOMMERCE_SHIPPING_ZONE_REMOVE, id } );
+export const removeShippingZone = ( index ) => ( { type: WOOCOMMERCE_SHIPPING_ZONE_REMOVE, index } );
 
 export const addLocationToShippingZone = ( locationType, locationCode ) => ( {
 	type: WOOCOMMERCE_SHIPPING_ZONE_LOCATION_ADD,
