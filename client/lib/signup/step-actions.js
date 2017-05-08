@@ -52,7 +52,11 @@ function createSiteOrDomain( callback, dependencies, data, reduxStore ) {
 }
 
 function linkExistingSite( callback, dependencies, data ) {
-	const { siteId, siteSlug } = data;
+	const { designType, siteId, siteSlug } = data;
+
+	if ( designType !== 'existing-site' ) {
+		return;
+	}
 
 	const providedDependencies = {
 		siteId,

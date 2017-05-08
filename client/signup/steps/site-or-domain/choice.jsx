@@ -19,13 +19,13 @@ export default class SiteOrDomainChoice extends Component {
 	render() {
 		const { choice } = this.props;
 		return (
-			<div className="site-or-domain__choice" key={ choice.type }>
+			<div className="site-or-domain__choice" key={ choice.type } onClick={ this.handleClickChoice }>
 				<Card compact className="site-or-domain__choice-image">
 					{ choice.image }
 				</Card>
 				<Card compact className="site-or-domain__choice-text">
 					<div className="site-or-domain__choice-button">
-						<Button onClick={ this.handleClickChoice }>{ choice.label }</Button>
+						<Button>{ choice.label }</Button>
 					</div>
 					<p>{ choice.description }</p>
 				</Card>
