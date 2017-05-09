@@ -16,15 +16,6 @@ module.exports = {
 		},
 		defaultVariation: 'original',
 	},
-	jetpackNoMonthly: {
-		datestamp: '20170410',
-		variations: {
-			showMonthly: 50,
-			dontShowMonthly: 50
-		},
-		defaultVariation: 'showMonthly',
-		allowExistingUsers: true
-	},
 	signupSurveyStep: {
 		datestamp: '20170329',
 		variations: {
@@ -32,14 +23,6 @@ module.exports = {
 			hideSurveyStep: 80,
 		},
 		defaultVariation: 'hideSurveyStep',
-	},
-	signupThemeStepCopyChanges: {
-		datestamp: '20170420',
-		variations: {
-			original: 50,
-			modified: 50,
-		},
-		defaultVariation: 'original',
 	},
 	signupPlansReorderTest: {
 		datestamp: '20170410',

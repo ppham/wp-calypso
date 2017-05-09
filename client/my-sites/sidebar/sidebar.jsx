@@ -29,8 +29,15 @@ import JetpackLogo from 'components/jetpack-logo';
 import { isPersonal, isPremium, isBusiness } from 'lib/products-values';
 import { getCurrentUser } from 'state/current-user/selectors';
 import { getSelectedSiteId } from 'state/ui/selectors';
+import { getCurrentLayoutFocus } from 'state/ui/layout-focus/selectors';
 import { setNextLayoutFocus, setLayoutFocus } from 'state/ui/layout-focus/actions';
-import { canCurrentUser, getPrimarySiteId, getSites, isDomainOnlySite } from 'state/selectors';
+import {
+	canCurrentUser,
+	getPrimarySiteId,
+	getSites,
+	isDomainOnlySite,
+	isSiteAutomatedTransfer
+} from 'state/selectors';
 import {
 	getCustomizerUrl,
 	getSite,
@@ -38,7 +45,6 @@ import {
 	isJetpackModuleActive,
 	isJetpackSite
 } from 'state/sites/selectors';
-import isSiteAutomatedTransfer from 'state/selectors/is-site-automated-transfer';
 import { getStatsPathForTab } from 'lib/route/path';
 import { isATEnabled } from 'lib/automated-transfer';
 import { abtest } from 'lib/abtest';
@@ -54,7 +60,6 @@ export class MySitesSidebar extends Component {
 		setNextLayoutFocus: PropTypes.func.isRequired,
 		setLayoutFocus: PropTypes.func.isRequired,
 		path: PropTypes.string,
-		sites: PropTypes.object,
 		currentUser: PropTypes.object,
 		isDomainOnly: PropTypes.bool,
 		isJetpack: PropTypes.bool,
@@ -72,6 +77,7 @@ export class MySitesSidebar extends Component {
 
 	onPreviewSite = ( event ) => {
 		const { site } = this.props;
+		analytics.ga.recordEvent( 'Sidebar', 'Clicked View Site' );
 		if ( site.is_previewable && ! event.metaKey && ! event.ctrlKey ) {
 			event.preventDefault();
 			this.props.setLayoutFocus( 'preview' );
@@ -97,6 +103,10 @@ export class MySitesSidebar extends Component {
 	};
 
 	isItemLinkSelected( paths ) {
+		if ( this.props.isPreviewShowing ) {
+			return false;
+		}
+
 		if ( ! Array.isArray( paths ) ) {
 			paths = [ paths ];
 		}
@@ -554,7 +564,7 @@ export class MySitesSidebar extends Component {
 			<Sidebar>
 				<SidebarRegion>
 					<CurrentSite
-						sites={ this.props.sites }
+						isPreviewShowing={ this.props.isPreviewShowing }
 						onClick={ this.onPreviewSite }
 					/>
 					{ this.renderSidebarMenus() }
@@ -587,6 +597,8 @@ function mapStateToProps( state ) {
 	// FIXME: Turn into dedicated selector
 	const hasJetpackSites = getSites( state ).some( s => s.jetpack );
 
+	const isPreviewShowing = getCurrentLayoutFocus( state ) === 'preview';
+
 	return {
 		atEnabled: isATEnabled( site ),
 		canManagePlugins,
@@ -600,6 +612,7 @@ function mapStateToProps( state ) {
 		hasJetpackSites,
 		isDomainOnly: isDomainOnlySite( state, selectedSiteId ),
 		isJetpack,
+		isPreviewShowing,
 		isSharingEnabledOnJetpackSite,
 		isSiteAutomatedTransfer: !! isSiteAutomatedTransfer( state, selectedSiteId ),
 		siteId,

@@ -90,7 +90,7 @@
     "ms": "0.7.1",
     "node-sass": "3.7.0",
     "npm-run-all": "4.0.2",
-    "notifications-panel": "1.1.6",
+    "notifications-panel": "1.1.7",
     "numeral": "2.0.4",
     "page": "1.6.4",
     "percentage-regex": "3.0.0",
@@ -145,7 +145,7 @@
     "wpcom-xhr-request": "1.1.0"
   },
   "engines": {
-    "node": "6.10.2",
+    "node": "6.10.3",
     "npm": "3.10.10"
   },
   "scripts": {
