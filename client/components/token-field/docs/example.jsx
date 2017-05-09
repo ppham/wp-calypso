@@ -72,7 +72,7 @@ var TokenFields = React.createClass( {
 				<Card>
 					<h3>TokenField with Placeholder Text</h3>
 					<TokenField
-						placeholder="Comma separate these"
+						placeholder="Red, Green, Blue"
 						value={ this.state.placeholderTokens }
 						onChange={ this._onPlaceholderTokensChange } />
 				</Card>
