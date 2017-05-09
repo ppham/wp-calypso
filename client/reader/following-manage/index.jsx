@@ -182,6 +182,7 @@ class FollowingManage extends Component {
 						fetchNextPage={ this.fetchNextPage }
 						forceRefresh={ this.state.forceRefresh }
 						searchResultsCount={ searchResultsCount }
+						query={ sitesQuery }
 					/>
 				) }
 				{ showExistingSubscriptions && (
