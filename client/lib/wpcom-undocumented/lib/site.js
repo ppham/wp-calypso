@@ -269,12 +269,12 @@ UndocumentedSite.prototype.runThemeSetup = function() {
 };
 
 /**
- * [ 'statsWoocommerce', 'woocommerce/stats', '1.1' ],
+ * Requests Woocommerce stats
  *
  * @param {object} query query parameters
  * @return {Promise} A Promise to resolve when complete.
  */
-UndocumentedSite.prototype.woocommerceStats = function( query ) {
+UndocumentedSite.prototype.statsWoocommerce = function( query ) {
 	return this.wpcom.req.get( Object.assign( query, {
 		path: '/sites/' + this._id + '/woocommerce/stats',
 		apiNamespace: 'wpcom/v2',
