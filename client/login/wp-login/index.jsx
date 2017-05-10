@@ -49,6 +49,13 @@ class Login extends React.Component {
 		this.props.showMagicLoginRequestForm();
 	};
 
+	constructor( props ) {
+		super( props );
+		this.state = {
+			loaded: false
+		};
+	}
+
 	magicLoginMainContent() {
 		const {
 			magicLoginView,
@@ -79,6 +86,13 @@ class Login extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		// Turning off eslint rule, as this flag is telling us when the component is
+		// loaded in the browser, which isn't guaranteed until componentDidMount() fires.
+		// eslint-disable-next-line react/no-did-mount-set-state
+		this.setState( { loaded: true } );
+	}
+
 	goBack = event => {
 		event.preventDefault();
 
@@ -105,7 +119,7 @@ class Login extends React.Component {
 		}
 
 		let goBackLink;
-		if ( typeof window === 'undefined' || window.history.length > 1 ) {
+		if ( this.state.loaded && window.history.length > 1 ) {
 			goBackLink = ! magicLoginView && <a
 				href="#"
 				key="back-link"
