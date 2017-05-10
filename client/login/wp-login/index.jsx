@@ -36,7 +36,7 @@ import RequestLoginEmailForm from '../magic-login/request-login-email-form';
 import { recordTracksEvent } from 'state/analytics/actions';
 import PageViewTracker from 'lib/analytics/page-view-tracker';
 
-class Login extends React.Component {
+export class Login extends React.Component {
 	onClickEnterPasswordInstead = event => {
 		event.preventDefault();
 		this.props.recordTracksEvent( 'calypso_login_enter_password_instead_click' );
@@ -103,7 +103,7 @@ class Login extends React.Component {
 		}
 	};
 
-	footerLinks() {
+	footerLinks = () => {
 		const {
 			magicLoginEnabled,
 			magicLoginView,
@@ -144,7 +144,7 @@ class Login extends React.Component {
 			showMagicLoginLink,
 			resetPasswordLink,
 		] );
-	}
+	};
 
 	render() {
 		const {
